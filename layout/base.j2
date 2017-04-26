@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+  {% block starthead %} {% endblock starthead %}
+  <meta charset="{{ resource.meta.charset }}">
+
+  <title>{% block title %}{{ resource.meta.author }} | {{ resource.meta.title }}{% endblock %}</title>
+  <meta name="description" content="{{ resource.meta.description }}">
+  <meta name="author" content="{{ resource.meta.author }}">
+
+  <!--  Mobile viewport optimized: j.mp/bplateviewport -->
+  <meta name="viewport" content="{{ resource.meta.viewport }}">
+
+  {% block favicons %} {% include "favicon.j2" %}  {% endblock favicons %}
+
+  {% block css %} {% include "css.j2" %} {% endblock css %}
+
+  {% block headjs %} {% include "headjs.j2" %} {% endblock headjs %}
+  
+  {% block endhead %}{% endblock endhead %}
+</head>
+
+
+
+<body id="{{ resource.meta.id if resource.meta.id else resource.slug }}">
+
+		  
+		  	 {% block navbar %} {% include "navbar.j2" %} {% endblock navbar%}
+		  	 		  	 
+		  	 
+		  	 	<section class="container">
+		  	     <div class="row">
+ 				<div class="span9">
+				 <div class="content">
+ 				{% block content %} 
+ 				
+ 				{% endblock %} </div>
+				 </div>
+		  	 
+		  	  
+		  	 {% block sidecol %} {% include "sidecol.j2" %} {% endblock sidecol%}
+		    
+		    </div>
+			 </section>
+		    	
+		    {% block footer %} {% include "footer.j2" %} {% endblock footer%}
+
+
+  {% block js %}
+		  <!-- Javascript at the bottom for fast page loading || DIRTY JAVASCRIPT WITH MULTIPLE LOADING FOR EACH bootstrap/captify => JQUERY.noclonflict-->
+		  {% block jquery %}
+		  <!-- <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script> -->
+		  
+		 <script type="text/javascript" src="{{ media_url('js/jquery_for_bootstrap.js') }}"></script>
+		 <script type="text/javascript" src="{{ media_url('js/bootstrap.min.js') }}"></script> 
+		  
+		<script> 
+		  $(function (){
+			   $("#pop").popover({placement:'bottom', trigger:'hover'});
+			});
+			$(function (){
+			   $("#popsource").popover({placement:'top', trigger:'hover'});
+			});
+		</script>	 
+		
+	 	<script type="text/javascript" src="{{ media_url('js/jquery.js') }}"></script>
+	  	<script type="text/javascript" src="{{ media_url('js/captify.tiny.js') }}"></script> 
+		
+		<script> 
+		$(document).ready(function(){
+	$('img.captify').captify({
+		// all of these options are... optional
+		// ---
+		// speed of the mouseover effect
+		speedOver: 150,
+		// speed of the mouseout effect
+		speedOut: 200,
+		// how long to delay the hiding of the caption after mouseout (ms)
+		hideDelay: 100,
+		// 'fade' or 'slide'
+		animation: 'fade',	  	
+		// text/html to be placed at the beginning of every caption
+		prefix: '',	
+		// the name of the CSS class to apply to the caption box
+		className: 'bannercaption'
+	});
+});
+
+   </script>
+  
+   
+		 {% endblock jquery %}
+
+		{% block scripts %}  {% endblock scripts %}
+
+		{% block analytics %}   {% include "analytics.j2" %}  {% endblock analytics %}
+
+  {% endblock js %}
+  
+  <!-- <div id="banner"><a href="/">Currently at IPDPS'2015</a></div> -->
+</body>
+</html>

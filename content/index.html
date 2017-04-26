@@ -1,0 +1,60 @@
+
+---
+
+extends: base.j2
+default_block: content
+title: Home page
+description: Home page with informations contacts
+---
+
+{% if resource.meta.title %}
+							<header class="page-header">
+							  {% block header %}
+							  <h1>
+							    {% block page_title %}{{ resource.meta.title }}{% endblock %}
+							    <small>
+							    {% block page_subtitle %}
+							    {% if resource.meta.subtitle %}
+							    {{ resource.meta.subtitle }}
+							    {% endif %}
+							    {% endblock %}
+							    </small>
+							  </h1>
+							  {% endblock header %}
+							</header>
+{% endif %}
+
+{% block main %}
+
+<div class="tabbable">
+
+  <ul class="nav nav-pills">
+    <li class="active"><a href="#bio" data-toggle="pill"><i class="icon-tag"></i> Bio</a></li>
+    <li><a href="#resume" data-toggle="pill"><i class="icon-briefcase"></i> Resume</a></li>
+<!--     <li><a href="#" data-toggle="pill"><i class="icon-tasks"></i> Skills</a></li> -->
+    <li><a href="#contact" data-toggle="pill" id="index-contact"><i class="icon-envelope"></i> Contact</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane fade in active" id="bio">
+    <div class="well">
+       {% include "bio.html" %}
+        </div>
+    </div>
+    <div class="tab-pane fade" id="resume">
+<!--     <div class="well"> -->
+      {% include "cv.html" %}
+<!--     </div> -->
+      </div>
+<!--        <div class="tab-pane fade" id="skills"> -->
+<!--       {% include "skills.html" %} -->
+<!--     </div> -->
+        <div class="tab-pane fade" id="contact">
+      <div class="well">
+      {% include "contact.html" %}
+    </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock main %}

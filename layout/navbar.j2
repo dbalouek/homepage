@@ -1,0 +1,23 @@
+<div class="navbar navbar-fixed-top navbar-inverse">
+<div class="navbar-inner">
+ <div class="container">
+ <a class="brand" href="{{ site_url }}">
+{{ site_title }}</a>
+ <ul class="nav">
+ <li{% if resource.node == site.content %} class="active"{% endif %}> <a href="{{ site_url }}"><i class="icon-user icon-white"></i> About Me</a> </li>
+ {# Dirty Hack to get the categories in the right order#} {# One Loop Per Categorie => Research #} 
+ {% for categorie_to_display in ["research","projects","teaching","links","portfolio"] %}
+  {% for menu_item in site.content.child_nodes|sort(attribute='name') %}
+   {% if menu_item.name == categorie_to_display %} 
+   <li{% if menu_item.full_url in resource.full_url %} class="active"
+   {% endif %}>
+ <a href="{{ menu_item.full_url }}">
+ {% if menu_item.meta.icon %} <i class="icon-{{menu_item.meta.icon}} icon-white">
+</i>
+ {% endif %} {{ menu_item.meta.title|capitalize }} </a>
+ </li>
+ {% endif %} {%- endfor %} {%- endfor %} </ul>
+ </div>
+ </div>
+
+ </div>
